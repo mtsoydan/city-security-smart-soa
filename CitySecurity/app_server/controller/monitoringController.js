@@ -1,5 +1,4 @@
-
-var user = require('../models/dbIslemleri.js');
+var db = require('../models/database.js');
 var path = require('path');
 var ejsLayouts=require('express-ejs-layouts');
 //const { Storage } = require('@google-cloud/storage');
@@ -85,6 +84,16 @@ module.exports.monNew = function (req, res) {
 
          
         })
+
+         for(var i=0; i < Object.keys(jsonArray.labels).length; i++){
+            var queryInsert="INSERT INTO returnlabel VALUES(' ','"+jsonArray.labels[i].LabelName+"','"+jsonArray.labels[i].confidence+"',NOW(),1)";
+            db.query(queryInsert, function (err, results, fields) {//ekleme işlemi
+                if (err) throw err.message;
+                
+        
+            });
+          
+        }
     }
   //  console.log(labels.length);
     console.log("Got a GET request for the homepage");
