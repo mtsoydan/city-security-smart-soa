@@ -19,10 +19,7 @@ module.exports.indexPost = function (req, res) {
             var userResult = results;
 
             if (req.body.password == userResult[0].password) {
-                res.render('layout',{
-                    body:"",
-                    username:username
-                });
+                res.render('home');
             }
             else {
                 res.render('login',{

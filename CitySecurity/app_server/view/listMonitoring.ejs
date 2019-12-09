@@ -1,75 +1,62 @@
-<!-- veritabanından çekme -->
+<%- include('header') -%>
 
-<template>
-  <div>
-    <page-head icon="th-list" title="All Monitorings" />
-    <div class="card mb-4">
-            <div class="card-body">
-            <div class="input-group">
-              <input type="text" id="input" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-            </div>
-        </div>
+
+<div class="bodyMon">
+  <page-head icon="th-list" title="All Monitorings" />
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="input-group">
+        <input type="text" class="searchInput" name="input" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container-fluid flex-grow-1 container-p-y">
+
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+      <div>All List</div>
+    </h4>
+
+
+    <div>
+      <table name="table" class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Label</th>
+            <th>Label Category</th>
+            <th>Confidence</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%if(jsonArray=="null"){%>
+          <tr>
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+          </tr>
+          <%}else{%>
+          <%for(var i=0; i < Object.keys(jsonArray.labels).length; i++){%>
+          <tr>
+            <td></td>
+
+            <td><%= jsonArray.labels[i].LabelName %></td>
+            <td></td>
+
+            <td><%= jsonArray.labels[i].confidence %></td>
+          </tr>
+          <%}}%>
+
+        </tbody>
+      </table>
     </div>
 
- 
-          <div class="container-fluid flex-grow-1 container-p-y">
-<!-- 
-            <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
-              <div>All List</div> 
-              <button onclick="window.location.href='/monitoring/save'" type="button" class="btn btn-primary rounded-pill d-block"><span class="ion ion-md-add"></span>&nbsp; New Monitoring</button>
-            </h4> -->
-
-
-            <div class="card">
-              <div class="card-datatable table-responsive">
-                <table id="table" class="table table-hover table-bordered">
-                  <thead>
-                    <tr>
-                    <th >Name</th>
-                      <th>Label</th>
-                      <th>Label Category</th>
-                      <th>Start Time</th>
-                      <th>End Time</th>
-                      <th>Confidence</th>
-                    </tr>
-                  </thead>
-                  <tbody v-for="(item, index) in monitorings" :key="index">
-                      <tr>
-                          <td>{{item.name}}</td>
-                          <td>{{item.label}}</td>
-                             <td>{{item.labelCategory}}</td>
-                          <td>{{item.startTimeOffset}}</td>
-                          <td>{{item.endTimeOffset}}</td>
-                          <td>{{item.confidence}}</td>
-                      </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-       
-
   </div>
-</template>
+  <!-- / Content -->
 
-  
-<script>
-  function myFunction() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("input");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("table");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[0];
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
-        }
-      }       
-    }
-  }
-  </script>
+</div>
+
+<%- include('footer') -%>
