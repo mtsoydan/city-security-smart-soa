@@ -11,12 +11,19 @@ module.exports.monGet=function(req,res) {
 }
 
 module.exports.monList = function (req, res) {
-    res.render('listMonitoring', {
-        jsonArray:"null"
 
-     
-    })
-}
+    var queryList="SELECT * FROM returnlabel";
+    db.query(queryList, function (err, results, fields) {
+        if (err) throw err.message
+        else {
+            res.render('listMonitoring', {
+                jsonArray:results
+               
+            })
+        }     
+    });   
+        
+    }
 module.exports.monNew = function (req, res) {
     var video_isle = async function Video() {
         var jsonArray;
