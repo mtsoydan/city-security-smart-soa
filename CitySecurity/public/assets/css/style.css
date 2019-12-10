@@ -16,21 +16,21 @@ body {
   background-color: white;
   width: 300px;
   margin:0 auto;
-  padding: 60px 40px 40px 40px;
+  padding: 40px 40px 40px 40px;
   animation: fade-in 1s ease-in 0s 1 alternate;
 }
  
-.loginanel:hover {
-  box-shadow: 0 0 50px rgba(1, 1, 1, .3);
-}
-
-
-  .panel-title h1 {
-      font-size: 25px;
-      display: block;
-      border-bottom:1px solid #E4E4E4;
-      color: #888;
+  .login-panel:hover {
+    box-shadow: 0 0 50px rgba(1, 1, 1, .3);
   }
+
+
+    .panel-title h1 {
+        font-size: 25px;
+        display: block;
+        border-bottom:1px solid #E4E4E4;
+        color: #888;
+    }
 
   
 /* Toggle Styles */
@@ -103,14 +103,19 @@ body {
 #sidebar .nav a i{
   margin-right: 16px;
 }
+
+  .input-group{
+    float: right;
+  }
+
+    .input-group:hover {
+      box-shadow: 0 0 50px rgba(1, 1, 1, .3);
+    }
+
 #kullanici{
   margin-top: 15px;
   margin-right: 20px;
   color: rgb(64, 64, 175);
-}
-.input-group{
-  float: right;
-  padding-right: 15px;
 }
 table{
   margin-top: 50px;

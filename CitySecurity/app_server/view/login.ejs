@@ -1,62 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>City Security System</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-    <link rel='stylesheet'
-        href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
-    <link rel="stylesheet" href="/public/assets/css/style.css">
-
-</head>
-
-<body>
-
-    <div class="container">
-
-        <div class="login-panel">
-            <div class="panel panel-info">
-
-                <div class="panel-heading">
-                    <div class="panel-title">Giriş Paneli</div>
-                </div>
-                <div class="panel-body">
-                    <form action="/" method="POST">
-                        <div class="container">
-                            <img src="/public/assets/resim/polis.jpeg" alt="..."
-                                style="border-radius: 150px; align-content: center;"><br>
+    <head>
+        <meta charset="UTF-8">
+        <title rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'></title>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="/public/assets/css/style.css">
+    </head>
+    <body>
+        <div class="container" style="margin-top: 100px;">
+            <div class="row">
+                <div class="col-md-4"></div>
+                
+                <div class="panel panel-info col-md-4">
+                    <div class="container">
+                        <div class="login-panel" style="background-color:whitesmoke">
+                            <div class="panel-heading">
+                                <div class="panel-title"><h1>Giriş Paneli</h1></div>
+                            </div>
+                            <div class="panel-body">
+                                <form action="/" method="POST">
+                                    <div class="container">
+                                        <img src="/public/assets/resim/polis.jpeg" alt="..." style="border-radius: 150px; align-content: center;"><br>
+                                    </div>
+                                    <div style="margin-bottom:25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="login-username" type="text" class="form-control" name="username" placeholder="kullanıcı adı">
+                                    </div>
+                                    <div style="margin-bottom:25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="password" type="text" class="form-control" name="password" placeholder="sifre">
+                                    </div><br>                                 
+                                    <input type="submit" class="btn btn-primary btn-block" value="Giriş">
+                                    <div style="margin-bottom:25px ; text-align:center">
+                                        <h2 style="color: red;"><%=hata%></h2>
+                                    </div>
+                                </form>
+                            </div>                                                                                            
                         </div>
-                        <div style="margin-bottom:25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username"
-                                placeholder="kullanıcı adı">
-                        </div>
-                        <div style="margin-bottom:25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="password" type="text" class="form-control" name="password" placeholder="sifre">
-                        </div>
-                        <input type="submit" class="btn btn-primary btn-block" value="Giriş">
-                        <div style="margin-bottom:25px ; text-align:center">
-                            <h2 style="color: red;"><%=hata%></h2>
-                        </div>
-
-
-                    </form>
-                </div>
-
+                    </div>
+                </div>  
+                <div class="col-md-4"></div>             
             </div>
-
         </div>
-    </div>
-
-
-
-
-    </div>
-
-
-
-</body>
+    </body>
 
 </html>
