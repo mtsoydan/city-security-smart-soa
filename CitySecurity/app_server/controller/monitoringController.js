@@ -85,15 +85,15 @@ module.exports.monNew = function (req, res) {
          
         })
 
-         for(var i=0; i < Object.keys(jsonArray.labels).length; i++){
-            var queryInsert="INSERT INTO returnlabel VALUES(' ','"+jsonArray.labels[i].LabelName+"','"+jsonArray.labels[i].confidence+"',NOW(),1)";
-            db.query(queryInsert, function (err, results, fields) {//ekleme işlemi
-                if (err) throw err.message;
+        //  for(var i=0; i < Object.keys(jsonArray.labels).length; i++){
+        //     var queryInsert="INSERT INTO returnlabel VALUES(' ','"+jsonArray.labels[i].LabelName+"','"+jsonArray.labels[i].confidence+"',NOW(),1)";
+        //     db.query(queryInsert, function (err, results, fields) {//ekleme işlemi
+        //         if (err) throw err.message;
                 
         
-            });
+        //     });
           
-        }
+        // }
     }
   //  console.log(labels.length);
     console.log("Got a GET request for the homepage");
