@@ -6,7 +6,8 @@
   <div class="card mb-4">
     <div class="card-body">
       <div class="input-group">
-        <input type="text" class="searchInput" name="input" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        <input type="text" class="searchInput" name="input" onkeyup="myFunction()" placeholder="Search for names.."
+          title="Type in a name">
       </div>
     </div>
   </div>
@@ -25,30 +26,29 @@
           <tr>
             <th>Name</th>
             <th>Label</th>
-            <th>Label Category</th>
             <th>Confidence</th>
+            <th>creation Time</th>
           </tr>
         </thead>
 
         <tbody>
-          <%if(jsonArray=="null"){%>
+          <%if(Object.keys(jsonArray).length>0){%>
+          <%for(var i=0; i < Object.keys(jsonArray).length; i++){%>
+          <tr>
+            <td></td>
+
+            <td><%= jsonArray[i].label %></td>
+            <td><%= jsonArray[i].confidence %></td>
+            <td><%= jsonArray[i].create_at %></td>
+          </tr>
+          <%}}else{%>
           <tr>
             <td>nan</td>
             <td>nan</td>
             <td>nan</td>
             <td>nan</td>
           </tr>
-          <%}else{%>
-          <%for(var i=0; i < Object.keys(jsonArray.labels).length; i++){%>
-          <tr>
-            <td></td>
-
-            <td><%= jsonArray.labels[i].LabelName %></td>
-            <td></td>
-
-            <td><%= jsonArray.labels[i].confidence %></td>
-          </tr>
-          <%}}%>
+          <%}%>
 
         </tbody>
       </table>

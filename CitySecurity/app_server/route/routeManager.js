@@ -12,4 +12,5 @@ module.exports = function (app) {
     app.use('/home', routeHome);
     app.use('/monitoring', routeMon);
 
+
 }

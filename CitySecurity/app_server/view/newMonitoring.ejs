@@ -6,7 +6,9 @@
 	<div class="card mb-4">
 		<div class="card-body">
 			<div class="input-group ">
-				<input type="text"  class="searchInput"  name="input" onkeyup="myFunction()" placeholder="Search for names.."
+				<!-- <input type="text"  class="search" onkeyup="myFunction()" name="input"  placeholder="Search for names.."
+					title="Type in a name"> -->
+				<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
 					title="Type in a name">
 			</div>
 		</div>
@@ -17,23 +19,23 @@
 
 		<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
 			<div>All List</div>
-			<button id ="btnNew" href="/monitoring/new" type="button"
-				class="btn btn-primary rounded-pill d-block"><span class="ion ion-md-add"></span>&nbsp; New
+			<button id="btnNew" href="/monitoring/new" type="button" class="btn btn-primary rounded-pill d-block"><span
+					class="ion ion-md-add"></span>&nbsp; New
 				Monitoring</button>
 		</h4>
-
-
 		<div>
-			<table name="table" class="table table-hover table-bordered">
+			<table name="table" id="myTable" class="table table-hover table-bordered result ">
 				<thead>
-					<tr>
+					<tr class="header">
 						<th>Name</th>
 						<th>Label</th>
+
+
 						<th>Label Category</th>
 						<th>Confidence</th>
+						<th>DANGER</th>
 					</tr>
 				</thead>
-
 				<tbody>
 					<%if(jsonArray=="null"){%>
 					<tr>
@@ -43,25 +45,49 @@
 						<td>nan</td>
 					</tr>
 					<%}else{%>
+
 					<%for(var i=0; i < Object.keys(jsonArray.labels).length; i++){%>
-					<tr>
-						<td></td>
+					<%if(jsonArray.labels[i].danger == "danger"){%>
+
+					<tr class="danger">
+						<td>mts</td>
 
 						<td><%= jsonArray.labels[i].LabelName %></td>
 						<td></td>
 
 						<td><%= jsonArray.labels[i].confidence %></td>
+						<td ><%= jsonArray.labels[i].danger %></td>
 					</tr>
+
+
+					<%}else{%>
+
+					<tr class="" >
+						<td>mts</td>
+
+						<td><%= jsonArray.labels[i].LabelName %></td>
+						<td></td>
+
+						<td><%= jsonArray.labels[i].confidence %></td>
+						<td id=""><%= jsonArray.labels[i].danger %></td>
+					</tr>
+					<%}%>
+
+
+
+					
 					<%}}%>
 
 				</tbody>
 			</table>
+
 		</div>
 
 	</div>
 	<!-- / Content -->
-
 </div>
 
 </div>
+
+
 <%- include('footer') -%>
