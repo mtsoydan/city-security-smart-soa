@@ -23,16 +23,17 @@
 					class="ion ion-md-add"></span>&nbsp; New
 				Monitoring</button>
 		</h4>
-
-
 		<div>
 			<table name="table" id="myTable" class="table table-hover table-bordered result ">
 				<thead>
 					<tr class="header">
 						<th>Name</th>
 						<th>Label</th>
+
+
 						<th>Label Category</th>
 						<th>Confidence</th>
+						<th>DANGER</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,15 +45,37 @@
 						<td>nan</td>
 					</tr>
 					<%}else{%>
+
 					<%for(var i=0; i < Object.keys(jsonArray.labels).length; i++){%>
-					<tr>
+					<%if(jsonArray.labels[i].danger == "danger"){%>
+
+					<tr class="danger">
 						<td>mts</td>
 
 						<td><%= jsonArray.labels[i].LabelName %></td>
 						<td></td>
 
 						<td><%= jsonArray.labels[i].confidence %></td>
+						<td ><%= jsonArray.labels[i].danger %></td>
 					</tr>
+
+
+					<%}else{%>
+
+					<tr class="" >
+						<td>mts</td>
+
+						<td><%= jsonArray.labels[i].LabelName %></td>
+						<td></td>
+
+						<td><%= jsonArray.labels[i].confidence %></td>
+						<td id=""><%= jsonArray.labels[i].danger %></td>
+					</tr>
+					<%}%>
+
+
+
+					
 					<%}}%>
 
 				</tbody>

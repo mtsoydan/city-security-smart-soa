@@ -19,6 +19,10 @@ body {
   padding: 40px 40px 40px 40px;
   animation: fade-in 1s ease-in 0s 1 alternate;
 }
+#dangerColorRow{
+  background-color: red;
+
+}
  
   .login-panel:hover {
     box-shadow: 0 0 50px rgba(1, 1, 1, .3);
