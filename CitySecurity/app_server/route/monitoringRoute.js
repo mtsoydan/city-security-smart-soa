@@ -4,7 +4,7 @@ var ctlMon=require('../controller/monitoringController');
 
 router.get('/',ctlMon.monGet);
 router.get('/list',ctlMon.monList);
-router.get('/new',ctlMon.monNew);
+router.post('/new',ctlMon.monNew);
 
 
 module.exports=router; 

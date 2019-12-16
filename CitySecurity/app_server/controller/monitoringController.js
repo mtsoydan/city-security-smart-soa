@@ -1,16 +1,44 @@
 var db = require('../models/database.js');
 var path = require('path');
 var ejsLayouts = require('express-ejs-layouts');
-//const { Storage } = require('@google-cloud/storage');
+const { Storage } = require('@google-cloud/storage');
 var arrayDanger = [];
 var sayac = 0;
 var danger = 'danger';
 var notDanger = 'not danger';
 module.exports.monGet = function (req, res) {
+    var getBucketMetadataiki = async function getBucketMetadata() {
+        // Get bucket metadata.
+        /**
+         * TODO(developer): Uncomment the following line before running the sample.
+         */
+        const { Storage } = require('@google-cloud/storage');
+        const bucketName = 'mts-bucket';
+        const storage = new Storage();
 
-    res.render('newMonitoring', {
-        jsonArray: "null"
-    });
+
+        //  Get Bucket Metadata
+        // const [metadata] = await storage.bucket(bucketName).getMetadata();
+
+        // for (const [key, value] of Object.entries(metadata)) {
+        //     console.log(`${key}: ${value}`);
+        // }
+     const [files] = await storage.bucket(bucketName).getFiles();
+
+        console.log('Files:');
+        files.forEach(file => {
+            console.log(file.name);
+        });
+
+        res.render('newMonitoring', {
+            jsonArray: "null",
+            files : files,
+            videoName: ""
+        });
+    }
+    getBucketMetadataiki();
+
+    
 }
 var dangerLabelDetect = function video() {
 
@@ -39,16 +67,29 @@ module.exports.monList = function (req, res) {
     });
 
 }
+
+
 module.exports.monNew = function (req, res) {
     dangerLabelDetect();
+    const videoName = req.body.username;
+   // console.log("-------------"+name);
+
+
+  
 
     var video_isle = async function Video() {
         var jsonArray;
         const video = require('@google-cloud/video-intelligence').v1;
         var jsonArrayTextex;
         const client = new video.VideoIntelligenceServiceClient();
-        const videoName = 'cat';
-        const gcsUri = 'gs://mts-bucket/' + videoName + '.mp4';
+      // const videoName = 'googlework_short';
+        const gcsUri = 'gs://mts-bucket/' + videoName ;
+        const { Storage } = require('@google-cloud/storage');
+        const bucketName = 'mts-bucket';
+        const storage = new Storage();
+
+
+     const [files] = await storage.bucket(bucketName).getFiles();
 
         const request = {
             inputUri: gcsUri,
@@ -98,7 +139,7 @@ module.exports.monNew = function (req, res) {
                     `${(time.endTimeOffset.nanos / 1e6).toFixed(0)}s`
                 );
                 console.log(`\tConfidence: ${segment.confidence}`);
-                jsonArrayText += '"confidence":' + '"' + segment.confidence +'" },';
+                jsonArrayText += '"confidence":' + '"' + segment.confidence + '" },';
 
 
 
@@ -116,11 +157,14 @@ module.exports.monNew = function (req, res) {
         jsonArray = JSON.parse(jsonArrayText);
         res.render('newMonitoring', {
             jsonArray: jsonArray,
+            files : files,
+            videoName :"https://storage.cloud.google.com/mts-bucket/" + videoName
+            
 
         })
         sayac++;
         for (var i = 0; i < Object.keys(jsonArray.labels).length; i++) {
-            var queryInsert = "INSERT INTO returnlabel VALUES(' ','" + jsonArray.labels[i].LabelName + "','" + jsonArray.labels[i].confidence + "',NOW(),1,'" + videoName + "')";
+            var queryInsert = "INSERT INTO returnlabel VALUES('"+videoName+"','" + jsonArray.labels[i].LabelName + "','" + jsonArray.labels[i].confidence + "',NOW(),1,'" + videoName + "')";
             db.query(queryInsert, function (err, results, fields) {//ekleme işlemi
                 if (err) throw err.message;
 
@@ -133,4 +177,9 @@ module.exports.monNew = function (req, res) {
     console.log("Got a GET request for the homepage");
     console.log("video işleniyor");
     video_isle();
+    
 }
+
+
+
+

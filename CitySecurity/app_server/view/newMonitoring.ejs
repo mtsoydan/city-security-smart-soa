@@ -19,10 +19,23 @@
 
 		<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
 			<div>All List</div>
-			<button id="btnNew" href="/monitoring/new" type="button" class="btn btn-primary rounded-pill d-block"><span
-					class="ion ion-md-add"></span>&nbsp; New
-				Monitoring</button>
+			<form action="/monitoring/new" method="POST">
+				<!-- <a href="/monitoring/new" class="btn btn-success" name="username">cat.mp4</a> -->
+				
+				<%if(files && files.length){%>
+				<% files.forEach(file => {%>
+				<input type="submit" class="btn btn-primary btn-block" name="username" value="<%= file.name%>">
+				
+				<%})%>
+				<%}else{%>
+
+				<%}%>
+			</form>
+
 		</h4>
+
+
+
 		<div>
 			<table name="table" id="myTable" class="table table-hover table-bordered result ">
 				<thead>
@@ -38,40 +51,42 @@
 				</thead>
 				<tbody>
 					<%if(jsonArray=="null"){%>
-					<tr>
-						<td>nan</td>
-						<td>nan</td>
-						<td>nan</td>
-						<td>nan</td>
-					</tr>
-					<%}else{%>
+				<tr>
+					<td>****</td>
+					<td>****</td>
+					<td>****</td>
+					<td>****</td>
+					<td>****</td>
 
-					<%for(var i=0; i < Object.keys(jsonArray.labels).length; i++){%>
-					<%if(jsonArray.labels[i].danger == "danger"){%>
+				</tr>
+				<%}else{%>
 
-					<tr class="danger">
-						<td>mts</td>
+				<%for(var i=0; i < Object.keys(jsonArray.labels).length; i++){%>
+				<%if(jsonArray.labels[i].danger == "danger"){%>
 
-						<td><%= jsonArray.labels[i].LabelName %></td>
-						<td></td>
+				<tr class="danger">
+					<td><%=videoName%></td>
 
-						<td><%= jsonArray.labels[i].confidence %></td>
-						<td ><%= jsonArray.labels[i].danger %></td>
-					</tr>
+					<td><%= jsonArray.labels[i].LabelName %></td>
+					<td></td>
+
+					<td><%= jsonArray.labels[i].confidence %></td>
+					<td><%= jsonArray.labels[i].danger %></td>
+				</tr>
 
 
-					<%}else{%>
+				<%}else{%>
 
-					<tr class="" >
-						<td>mts</td>
+				<tr class="">
+					<td><%=videoName%></td>
 
-						<td><%= jsonArray.labels[i].LabelName %></td>
-						<td></td>
+					<td><%= jsonArray.labels[i].LabelName %></td>
+					<td></td>
 
-						<td><%= jsonArray.labels[i].confidence %></td>
-						<td id=""><%= jsonArray.labels[i].danger %></td>
-					</tr>
-					<%}%>
+					<td><%= jsonArray.labels[i].confidence %></td>
+					<td id=""><%= jsonArray.labels[i].danger %></td>
+				</tr>
+				<%}%>
 
 
 
@@ -79,12 +94,19 @@
 					<%}}%>
 
 				</tbody>
-			</table>
+				</table>
 
-		</div>
+				<div class="embed-responsive embed-responsive-4by3">
+					<iframe frameborder="0" class="embed-responsive-item"
+						src="<%=videoName%>"></iframe>
+				</div>
+
 
 	</div>
-	<!-- / Content -->
+
+
+</div>
+<!-- / Content -->
 </div>
 
 </div>

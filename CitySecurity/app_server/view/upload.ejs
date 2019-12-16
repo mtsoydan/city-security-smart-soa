@@ -1,0 +1,77 @@
+<%- include('header') -%>
+
+
+<div class="bodyMon">
+  <page-head icon="th-list" title="All Monitorings" />
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="input-group">
+        <input type="text" class="searchInput" name="input" placeholder="Search for names.."
+          title="Type in a name">
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container-fluid flex-grow-1 container-p-y">
+
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+      <div>All List222</div>
+    </h4>
+
+
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2">
+          <h3>File Input Example</h3>
+      <form method="POST" action="/upload" enctype="multipart/form-data">
+        <!-- COMPONENT START -->
+        <div class="form-group">
+          <div name="username" class="input-group input-file" name="Fichier1">
+            <span class="input-group-btn">
+                  <button class="btn btn-default btn-choose" type="button">Choose</button>
+              </span>
+              <input  type="text" class="form-control" placeholder='Choose a file...' />
+              <span class="input-group-btn">
+                    <button class="btn btn-warning btn-reset" type="button">Reset</button>
+              </span>
+          </div>
+        </div>
+        <!-- COMPONENT END -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary pull-right" >Submit</button>
+          <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+          <p>Submit is disabled because it's not handle on this site
+          <p>Input Reset or Input Choose can be omitted
+          <p>Input Reset or Input Choose can be placed on left or right
+      </form>
+              
+              
+              <h3>Another example</h3>
+      <form method="POST" action="/upload" enctype="multipart/form-data">
+        <!-- COMPONENT START -->
+        <div class="form-group">
+          <div class="input-group input-file" name="Fichier2">
+              <input type="text" class="form-control" placeholder='Choose a file...' />			
+                  <span class="input-group-btn">
+                  <button class="btn btn-default btn-choose" type="button">Choose</button>
+              </span>
+      
+      
+          </div>
+        </div>
+        <!-- COMPONENT END -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary pull-right" >Submit</button>
+          <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+      </form>
+      </div>
+      </div>
+
+  </div>
+  <!-- / Content -->
+
+</div>
+
+<%- include('footer') -%>
