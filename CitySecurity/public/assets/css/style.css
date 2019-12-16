@@ -133,3 +133,19 @@ table{
   display: none;}
 .display {
   display: block !important;}
+
+
+.imgSmart {
+  width: 100%;
+  height: auto;
+  padding-bottom: 30px;
+}
+.contact-content img{
+  border-radius: 100px; align-content: center;
+}
+
+.aboutBaslik{
+  font-weight: bold;
+  font-size: 40px;
+  
+}
