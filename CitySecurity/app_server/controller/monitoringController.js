@@ -106,6 +106,10 @@ module.exports.monNew = function (req, res) {
         labels.forEach(label => {
 
             console.log(`Label ${label.entity.description} occurs at:`);
+            if ( label.entity.description == "police") {
+
+                label.entity.description = "combat"
+            }
             jsonArrayText += '{ "LabelName":' + '"' + label.entity.description + '"' + ',';
             if (arrayDanger.includes(String(label.entity.description))) {
 
@@ -152,8 +156,6 @@ module.exports.monNew = function (req, res) {
         jsonArrayText = jsonArrayText.substr(0, n - 1);
 
         jsonArrayText += ']}';
-
-
         jsonArray = JSON.parse(jsonArrayText);
         res.render('newMonitoring', {
             jsonArray: jsonArray,
