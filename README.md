@@ -9,8 +9,7 @@ Güvenlik sistemlerinde görüntü içeriğinin otomatik olarak analiz edilmesi 
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
 * [Found a Bug? Want to Contribute?](#found-a-bug-want-to-contribute)
-* [Test](#test)
-* [Production](#production)
+
 
 ## Features
 
