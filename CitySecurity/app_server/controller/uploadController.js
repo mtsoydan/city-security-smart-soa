@@ -8,7 +8,7 @@ const { Storage } = require('@google-cloud/storage');
 
 
 module.exports.monUp = function (req, res) {
-    console.log("/////////selam");
+   
     res.render('upload')
 }
 

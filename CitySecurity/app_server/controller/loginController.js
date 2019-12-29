@@ -10,15 +10,17 @@ module.exports.indexGet = function (req, res) {
 module.exports.indexPost = function (req, res) {
 
     var username = req.body.username;
-    var queryUser = "SELECT `password` FROM `usertable` WHERE `username`='" + username + "'";
+    //var queryUser = "SELECT `password` FROM `usertable` WHERE `username`='" + username + "'";
+    var queryUser = "CALL sp_login(?)";
 
-    db.query(queryUser, function (err, results) {//listeleme işlemi
+    db.query(queryUser,[username], function (err, results) {//listeleme işlemi
+        console.log(results[0][0].password)
         if (err) throw err;
 
         else {
             var userResult = results;
 
-            if (req.body.password == userResult[0].password) {
+            if (req.body.password == userResult[0][0].password) {
                 res.render('home');
                 
             }

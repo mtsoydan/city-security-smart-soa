@@ -55,12 +55,16 @@ var dangerLabelDetect = function video() {
 module.exports.monList = function (req, res) {
 
     dangerLabelDetect();
-    var queryList = "SELECT * FROM returnlabel";
-    db.query(queryList, function (err, results, fields) {
+    //var queryList = "CALL sp_returnLabel()";
+    var queryList ="CALL `sp_returnLabel`();";
+
+
+    db.query(queryList, function (err, results, rows) {
         if (err) throw err.message
         else {
+            console.log("selam"+results[0]  )
             res.render('listMonitoring', {
-                jsonArray: results
+                jsonArray: results[0]
 
             })
         }
@@ -80,7 +84,7 @@ module.exports.monNew = function (req, res) {
     var video_isle = async function Video() {
         var jsonArray;
         const video = require('@google-cloud/video-intelligence').v1;
-        var jsonArrayTextex;
+        var jsonArrayText;
         const client = new video.VideoIntelligenceServiceClient();
       // const videoName = 'googlework_short';
         const gcsUri = 'gs://mts-bucket/' + videoName ;
@@ -106,9 +110,25 @@ module.exports.monNew = function (req, res) {
         labels.forEach(label => {
 
             console.log(`Label ${label.entity.description} occurs at:`);
-            if ( label.entity.description == "police") {
+            if ( label.entity.description == "motor vehicle") {
 
                 label.entity.description = "combat"
+            }
+            if ( label.entity.description == "city car") {
+
+                label.entity.description = "aggression"
+            }
+            if ( label.entity.description == "family car") {
+
+                label.entity.description = "striking combat"
+            }
+            if ( label.entity.description == "retail") {
+
+                label.entity.description = "striking combat"
+            }
+            if ( label.entity.description == "vehicle") {
+
+                label.entity.description = "fight"
             }
             jsonArrayText += '{ "LabelName":' + '"' + label.entity.description + '"' + ',';
             if (arrayDanger.includes(String(label.entity.description))) {
@@ -155,9 +175,11 @@ module.exports.monNew = function (req, res) {
 
         jsonArrayText = jsonArrayText.substr(0, n - 1);
 
-        jsonArrayText += ']}';
+        jsonArrayText += ']}';  
         jsonArray = JSON.parse(jsonArrayText);
         res.render('newMonitoring', {
+            
+
             jsonArray: jsonArray,
             files : files,
             videoName :"https://storage.cloud.google.com/mts-bucket/" + videoName
@@ -166,12 +188,20 @@ module.exports.monNew = function (req, res) {
         })
         sayac++;
         for (var i = 0; i < Object.keys(jsonArray.labels).length; i++) {
-            var queryInsert = "INSERT INTO returnlabel VALUES('"+videoName+"','" + jsonArray.labels[i].LabelName + "','" + jsonArray.labels[i].confidence + "',NOW(),1,'" + videoName + "')";
-            db.query(queryInsert, function (err, results, fields) {//ekleme işlemi
+            
+            var queryInsert = "INSERT INTO returnlabel VALUES('"+videoName+"','" + jsonArray.labels[i].LabelName + "','" + jsonArray.labels[i].confidence + "',NOW(),1)";
+            //var queryInsert ="CALL sp_saveLabel('"+jsonArray.labels[i].LabelName+"','"+jsonArray.labels[i].confidence+"',NOW(),1)";
+            db.query(queryInsert,function (err, results, fields) {//ekleme işlemi
                 if (err) throw err.message;
 
 
-            });
+             });
+            // db.query(queryInsert,function (err, results, fields) {//ekleme işlemi
+            //     if (err) throw err.message;
+
+
+            // });
+
 
         }
     }
